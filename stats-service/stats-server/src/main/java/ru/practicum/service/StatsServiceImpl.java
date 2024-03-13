@@ -29,10 +29,7 @@ public class StatsServiceImpl implements StatsService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<StatsDto> getStats(String start, String end, List<String> uris, Boolean unique) {
-        LocalDateTime startDate = parseDate(start);
-        LocalDateTime endDate = parseDate(end);
-
+    public List<StatsDto> getStats(LocalDateTime startDate, LocalDateTime endDate, List<String> uris, Boolean unique) {
         if (startDate.isAfter(endDate)) {
             throw new InvalidPathVariableException("Дата и время начала диапазона не может быть " +
                     "позже даты и времени конца диапазона");
@@ -51,10 +48,4 @@ public class StatsServiceImpl implements StatsService {
             }
         }
     }
-
-    private LocalDateTime parseDate(String date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        return LocalDateTime.parse(date, formatter);
-    }
-
 }
