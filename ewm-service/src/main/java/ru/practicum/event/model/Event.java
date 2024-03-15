@@ -5,7 +5,6 @@ import ru.practicum.enums.EventState;
 import ru.practicum.category.model.Category;
 import ru.practicum.location.Location;
 import ru.practicum.user.model.User;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -63,7 +62,6 @@ public class Event {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "initiator_id", nullable = false, referencedColumnName = "id")
     @ToString.Exclude
-    @JsonProperty("initiator")
     private User initiator;
 
     @Enumerated(EnumType.STRING)

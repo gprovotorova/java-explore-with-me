@@ -21,6 +21,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 import javax.persistence.Enumerated;
 import javax.persistence.EnumType;
+import javax.persistence.FetchType;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -41,11 +42,11 @@ public class ParticipationRequest {
     @Column(name = "created")
     private LocalDateTime created;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "event_id", nullable = false)
     private Event event;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "requester_id", nullable = false)
     private User requester;
 

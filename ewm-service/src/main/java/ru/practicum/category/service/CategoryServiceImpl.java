@@ -4,7 +4,6 @@ import ru.practicum.category.dto.CategoryDto;
 import ru.practicum.category.mapper.CategoryMapper;
 import ru.practicum.category.model.Category;
 import ru.practicum.category.repository.CategoryRepository;
-import ru.practicum.event.repository.EventRepository;
 import ru.practicum.exception.ConflictDataException;
 import ru.practicum.exception.DataViolationException;
 import ru.practicum.exception.ObjectExistException;
@@ -24,7 +23,6 @@ import java.util.stream.Collectors;
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
-    private final EventRepository eventRepository;
 
     @Override
     @Transactional
@@ -40,12 +38,11 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     @Transactional
     public void deleteCategory(Long catId) {
-        Category category = categoryRepository.findById(catId)
-                .orElseThrow(() -> new ObjectNotFoundException("Категория с id = " + catId + " не найдена"));
-        if (eventRepository.existsByCategory(category)) {
+        if (categoryRepository.findCategoryWithEvent(catId) != null) {
             throw new ConflictDataException("Нельзя удалить категорию. Есть связанные события.");
         }
-        categoryRepository.deleteById(catId);
+        categoryRepository.findById(catId)
+                .ifPresent(category -> categoryRepository.deleteById(catId));
     }
 
     @Override

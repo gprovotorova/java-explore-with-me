@@ -2,7 +2,6 @@ package ru.practicum.event.repository;
 
 import ru.practicum.enums.EventState;
 import ru.practicum.event.model.Event;
-import ru.practicum.category.model.Category;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -51,8 +50,6 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     Page<Event> findAllByInitiatorId(Long userId, Pageable page);
 
     Set<Event> findAllByIdIsIn(Set<Long> eventsIds);
-
-    Boolean existsByCategory(Category category);
 
     Optional<Event> findByIdAndInitiatorId(Long eventId, Long userId);
 }

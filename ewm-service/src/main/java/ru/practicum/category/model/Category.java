@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
-import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
@@ -27,7 +26,6 @@ public class Category {
     @Column(name = "id")
     private Long id;
 
-    @NotBlank(message = "Название не может быть пустым.")
     @Column(name = "name", unique = true, length = 100, nullable = false)
     private String name;
 }

@@ -1,7 +1,6 @@
 package ru.practicum.compilation.model;
 
 import ru.practicum.event.model.Event;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,7 +27,6 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "compilations")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Builder
 public class Compilation {
 
