@@ -38,7 +38,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     @Transactional
     public void deleteCategory(Long catId) {
-        if (categoryRepository.findCategoryWithEvent(catId) != null) {
+        if (categoryRepository.findCategoryWithEvent(catId)) {
             throw new ConflictDataException("Нельзя удалить категорию. Есть связанные события.");
         }
         categoryRepository.findById(catId)
