@@ -1,10 +1,8 @@
 package ru.practicum.mapper;
 
-import org.springframework.stereotype.Component;
 import ru.practicum.dto.EndpointHitDto;
 import ru.practicum.model.EndpointHit;
 
-@Component
 public class StatsMapper {
 
     public static EndpointHit toEndpoint(EndpointHitDto endpointDto) {
