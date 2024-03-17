@@ -42,7 +42,7 @@ public class CommentServiceImpl implements CommentService {
 
         Comment comment = CommentMapper.toCommentFromNew(commentDto, event, user);
 
-        if(!event.getState().equals(EventState.PUBLISHED)){
+        if (!event.getState().equals(EventState.PUBLISHED)) {
             throw new ConflictDataException("Комментарий нельзя оставить у неопубликованного события.");
         }
 
@@ -75,7 +75,7 @@ public class CommentServiceImpl implements CommentService {
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new ObjectNotFoundException("Комментарий с id = " + commentId + " не найден."));
 
-        if(comment.getAuthor().getId() != userId || comment.getEvent().getInitiator().getId() != userId){
+        if (comment.getAuthor().getId() != userId || comment.getEvent().getInitiator().getId() != userId) {
             throw new ConflictDataException("Комментарий может удалить только автор комментария или автор события.");
         }
         commentRepository.deleteById(commentId);
