@@ -75,8 +75,9 @@ public class CommentServiceImpl implements CommentService {
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new ObjectNotFoundException("Комментарий с id = " + commentId + " не найден."));
 
-        if (!comment.getAuthor().getId().equals(userId) || !comment.getEvent().getInitiator().getId().equals(userId)) {
-            throw new ConflictDataException("Комментарий может удалить только автор комментария или автор события.");
+        Long authorId = comment.getAuthor().getId();
+        if (!authorId.equals(userId)) {
+            throw new ConflictDataException("Комментарий может удалить только автор комментария.");
         }
         commentRepository.deleteById(commentId);
     }
