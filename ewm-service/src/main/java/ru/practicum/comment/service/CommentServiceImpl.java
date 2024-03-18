@@ -93,7 +93,7 @@ public class CommentServiceImpl implements CommentService {
         return commentRepository.findAllByEventIdAndAuthorId(eventId, userId, page)
                 .getContent()
                 .stream()
-                .map((Comment comment) -> CommentMapper.toCommentDto(comment, event, user))
+                .map(comment -> CommentMapper.toCommentDto(comment, event, user))
                 .collect(Collectors.toList());
     }
 
@@ -103,7 +103,7 @@ public class CommentServiceImpl implements CommentService {
         return commentRepository.findAll(page)
                 .getContent()
                 .stream()
-                .map((Comment comment) -> CommentMapper.toCommentDto(comment, comment.getEvent(), comment.getAuthor()))
+                .map(comment -> CommentMapper.toCommentDto(comment, comment.getEvent(), comment.getAuthor()))
                 .collect(Collectors.toList());
     }
 
@@ -116,7 +116,7 @@ public class CommentServiceImpl implements CommentService {
         return commentRepository.findAllByAuthorId(userId, page)
                 .getContent()
                 .stream()
-                .map((Comment comment) -> CommentMapper.toCommentDto(comment, comment.getEvent(), user))
+                .map(comment -> CommentMapper.toCommentDto(comment, comment.getEvent(), user))
                 .collect(Collectors.toList());
     }
 
@@ -137,7 +137,7 @@ public class CommentServiceImpl implements CommentService {
         return commentRepository.findAllByEventId(eventId, page)
                 .getContent()
                 .stream()
-                .map((Comment comment) -> CommentMapper.toCommentDto(comment, event, comment.getAuthor()))
+                .map(comment -> CommentMapper.toCommentDto(comment, event, comment.getAuthor()))
                 .collect(Collectors.toList());
     }
 
@@ -153,7 +153,7 @@ public class CommentServiceImpl implements CommentService {
 
         List<CommentDto> comments = commentRepository.getCommentsWithFilters(rangeStart, rangeEnd, page)
                 .getContent().stream()
-                .map((Comment comment) -> CommentMapper.toCommentDto(comment, comment.getEvent(), comment.getAuthor()))
+                .map(comment -> CommentMapper.toCommentDto(comment, comment.getEvent(), comment.getAuthor()))
                 .collect(Collectors.toList());
         return comments;
     }

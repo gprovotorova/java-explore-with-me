@@ -27,7 +27,7 @@ public class CommentController {
 
     private final CommentService commentService;
 
-    @PostMapping("/users/{userId}/events/{eventId}/comments") // 1. Создание комментария
+    @PostMapping("/users/{userId}/events/{eventId}/comments")
     @ResponseStatus(HttpStatus.CREATED)
     public CommentDto createComment(@PathVariable @PositiveOrZero Long userId,
                                     @PathVariable @PositiveOrZero Long eventId,
@@ -37,7 +37,7 @@ public class CommentController {
         return commentService.createComment(userId, eventId, commentDto);
     }
 
-    @PatchMapping("/users/{userId}/events/{eventId}/comments/{commentId}") // 2. Обновление комментария
+    @PatchMapping("/users/{userId}/events/{eventId}/comments/{commentId}")
     @ResponseStatus(HttpStatus.OK)
     public CommentDto updateComment(@PathVariable @PositiveOrZero Long userId,
                                     @PathVariable @PositiveOrZero Long eventId,
@@ -48,7 +48,7 @@ public class CommentController {
         return commentService.updateComment(userId, eventId, commentId, commentDto);
     }
 
-    @DeleteMapping("/users/{userId}/comments/{commentId}") // 3. Удаление комментария
+    @DeleteMapping("/users/{userId}/comments/{commentId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCommentByUser(@PathVariable @PositiveOrZero Long userId,
                                     @PathVariable @PositiveOrZero Long commentId) {
@@ -56,7 +56,7 @@ public class CommentController {
         commentService.deleteCommentByUser(userId, commentId);
     }
 
-    @GetMapping("/users/{userId}/events/{eventId}/comments") // 4. Получение всех комментариев к событию от пользователя
+    @GetMapping("/users/{userId}/events/{eventId}/comments")
     @ResponseStatus(HttpStatus.OK)
     public List<CommentDto> getAllByEventIdAndUserId(@PathVariable @PositiveOrZero Long userId,
                                                      @PathVariable @PositiveOrZero Long eventId,
@@ -67,7 +67,7 @@ public class CommentController {
         return commentService.getAllByEventIdAndUserId(eventId, userId, page);
     }
 
-    @GetMapping("/users/{userId}/comments") // 5. Получение всех комментариев пользователя
+    @GetMapping("/users/{userId}/comments")
     @ResponseStatus(HttpStatus.OK)
     public List<CommentDto> getAllByUserId(@PathVariable @PositiveOrZero Long userId,
                                            @PositiveOrZero @RequestParam(defaultValue = "0") Integer from,
@@ -77,7 +77,7 @@ public class CommentController {
         return commentService.getAllByUserId(userId, page);
     }
 
-    @GetMapping("/users/{userId}/comments/{commentId}") // 6. Получение комментария по id
+    @GetMapping("/users/{userId}/comments/{commentId}")
     @ResponseStatus(HttpStatus.OK)
     public CommentDto getByCommentId(@PathVariable @PositiveOrZero Long userId,
                                      @PathVariable @PositiveOrZero Long commentId) {
@@ -85,7 +85,7 @@ public class CommentController {
         return commentService.getByCommentId(commentId, userId);
     }
 
-    @GetMapping("/events/{eventId}/comments") // 7. Получение всех комментариев к событию
+    @GetMapping("/events/{eventId}/comments")
     @ResponseStatus(HttpStatus.OK)
     public List<CommentDto> getByEventId(@PathVariable @PositiveOrZero Long eventId,
                                          @PositiveOrZero @RequestParam(defaultValue = "0") Integer from,
@@ -95,7 +95,7 @@ public class CommentController {
         return commentService.getByEventId(eventId, page);
     }
 
-    @GetMapping("/admin/comments") // 8. Получение всех комментариев
+    @GetMapping("/admin/comments")
     @ResponseStatus(HttpStatus.OK)
     public List<CommentDto> getAllComments(@PositiveOrZero @RequestParam(defaultValue = "0") Integer from,
                                            @Positive @RequestParam(defaultValue = "10") Integer size) {
@@ -105,7 +105,7 @@ public class CommentController {
     }
 
 
-    @GetMapping("/comments") // 9. Получение комментариев с фильтрами
+    @GetMapping("/comments")
     @ResponseStatus(HttpStatus.OK)
     public List<CommentDto> getCommentsWithFilters(@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
                                                    @RequestParam(required = false) LocalDateTime rangeStart,

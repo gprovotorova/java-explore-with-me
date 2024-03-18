@@ -8,8 +8,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface CommentService {
-
-
     CommentDto createComment(Long userId, Long eventId, NewCommentDto commentDto);
 
     CommentDto updateComment(Long userId, Long eventId, Long commentId, NewCommentDto commentDto);
